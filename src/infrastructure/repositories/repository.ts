@@ -1,13 +1,23 @@
-import { CreateUserDTO } from "../../application/interfaces/create-user-dto";
+import { UserDTO } from "../../application/contracts/user-dto";
+import { RepositoryContract } from "../../application/contracts/repository";
+import { sqlRepositoryContract } from "../contracts/sql";
 
-export interface Repository {
-    save: ({
-        name,
-        email,
-        password,
-        sessions,
-        webhooks
-    }: CreateUserDTO) => Promise<CreateUserDTO>
+export class Repository implements RepositoryContract {
+    constructor(
+        private readonly sqlRepository: sqlRepositoryContract
+    ) { }
 
-    findByEmail: (email: string) => Promise<CreateUserDTO> | null
+    async save({ name, email, password, sessions, webhooks }: UserDTO): Promise<UserDTO> {
+        const user = await this.sqlRepository.save({
+            name, email, password, sessions, webhooks
+        });
+
+        return user;
+    }
+
+    async findByEmail(email: string): Promise<UserDTO | undefined> {
+        const user = await this.sqlRepository.findByEmail(email);
+
+        return user;
+    }
 }

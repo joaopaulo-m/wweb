@@ -1,12 +1,12 @@
-import { User } from "../../domain/entities/user";
-import { CreateUserUseCase } from "../../domain/usecases/create-user/create-user";
-import { CryptProvider } from "../../infrastructure/providers/crypt";
-import { Repository } from "../../infrastructure/repositories/repository";
+import { User } from "../../../domain/entities/user";
+import { CreateUserUseCase } from "../../../domain/usecases/user/create";
+import { CryptProviderContract } from "../../contracts/crypt";
+import { RepositoryContract } from "../../contracts/repository";
 
-class CreateUserService implements CreateUserUseCase {
+export class CreateUserService implements CreateUserUseCase {
     constructor(
-        private readonly repository: Repository,
-        private readonly cryptProvider: CryptProvider
+        private readonly repository: RepositoryContract,
+        private readonly cryptProvider: CryptProviderContract
     ){}
 
     async execute({ name, email, password, sessions, webhooks }: User) {
@@ -19,7 +19,7 @@ class CreateUserService implements CreateUserUseCase {
         const user = await this.repository.save({
             name,
             email,
-            password,
+            password: passwordHash,
             sessions,
             webhooks
         });

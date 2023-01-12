@@ -1,3 +1,2 @@
 import { User } from "../../domain/entities/user"
-
-export type CreateUserDTO = User
+export type UserDTO = User
