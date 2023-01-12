@@ -1,4 +1,4 @@
-import { CreateUserDTO } from "../../application/contracts/create-user-dto";
+import { CreateUserDTO } from "../../application/interfaces/create-user-dto";
 
 export interface Repository {
     save: ({
