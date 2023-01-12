@@ -15,3 +15,5 @@ const createUserUseCase = new CreateUserService(prismaService, bcryptService);
 const createUserController = new CreateUserController(createUserUseCase);
 
 router.post('/users', createUserController.handle)
+
+export { router };
