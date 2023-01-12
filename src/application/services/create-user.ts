@@ -1,5 +1,5 @@
+import { User } from "../../domain/entities/user";
 import { CreateUserUseCase } from "../../domain/usecases/create-user/create-user";
-import { CreateUserDTO } from "../../domain/usecases/create-user/create-user-dto";
 import { CryptProvider } from "../../infrastructure/providers/crypt";
 import { Repository } from "../../infrastructure/repositories/repository";
 
@@ -9,7 +9,7 @@ class CreateUserService implements CreateUserUseCase {
         private readonly cryptProvider: CryptProvider
     ){}
 
-    async execute({ name, email, password, sessions, webhooks }: CreateUserDTO) {
+    async execute({ name, email, password, sessions, webhooks }: User) {
         
         const userAlreadyExists = await this.repository.findByEmail(email)
         const passwordHash = this.cryptProvider.createHash(password, 8)

@@ -1,4 +1,4 @@
-import { UserContract } from "../../application/contracts/user";
+import { CreateUserDTO } from "../../application/contracts/create-user-dto";
 
 export interface Repository {
     save: ({
@@ -7,7 +7,7 @@ export interface Repository {
         password,
         sessions,
         webhooks
-    }: UserContract) => Promise<UserContract>
+    }: CreateUserDTO) => Promise<CreateUserDTO>
 
-    findByEmail: (email: string) => Promise<UserContract> | null
+    findByEmail: (email: string) => Promise<CreateUserDTO> | null
 }
