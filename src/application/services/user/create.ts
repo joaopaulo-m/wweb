@@ -1,12 +1,12 @@
 import { User } from "../../../domain/entities/user";
 import { CreateUserUseCase } from "../../../domain/usecases/user/create";
-import { CryptProviderContract } from "../../contracts/crypt";
+import { CryptServiceContract } from "../../contracts/crypt";
 import { RepositoryContract } from "../../contracts/repository";
 
 export class CreateUserService implements CreateUserUseCase {
     constructor(
         private readonly repository: RepositoryContract,
-        private readonly cryptProvider: CryptProviderContract
+        private readonly cryptProvider: CryptServiceContract
     ){}
 
     async execute({ name, email, password, sessions, webhooks }: User) {

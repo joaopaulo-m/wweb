@@ -1,4 +1,4 @@
-export interface CryptProviderContract {
-  createHash: (input: string, salt: number) => string
-  compare: (input: string, hash: string) => boolean
+export interface CryptServiceContract {
+  createHash: (input: string, salt: number) => Promise<string>
+  compare: (input: string, hash: string) => Promise<boolean>
 }

@@ -4,5 +4,5 @@ export type TokenData = {
 }
 
 export interface TokenContract  {
-  sign: ({ email, password }: TokenData, secretKey: string) => string
+  sign: ({ email, password }: TokenData, secretKey: any) => string
 }

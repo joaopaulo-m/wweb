@@ -1,12 +1,12 @@
 import { AuthenticateUserUseCase } from "../../../domain/usecases/user/authenticate";
-import { CryptProviderContract } from "../../contracts/crypt";
+import { CryptServiceContract } from "../../contracts/crypt";
 import { RepositoryContract } from "../../contracts/repository";
 import { TokenContract } from "../../contracts/token";
 
 export class AuthenticateUserService implements AuthenticateUserUseCase {
   constructor(
     private readonly repository: RepositoryContract,
-    private readonly crypt: CryptProviderContract,
+    private readonly crypt: CryptServiceContract,
     private readonly tokenProvider: TokenContract
   ){}
 
