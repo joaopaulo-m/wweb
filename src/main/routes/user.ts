@@ -10,8 +10,8 @@ const router = express.Router();
 const prismaOrm = new PrismaService();
 const bcryptService = new BcryptService();
 const repository = new Repository(prismaOrm);
-const createUserUseCase = new CreateUserService(repository, bcryptService);
-const createUserController = new CreateUserController(createUserUseCase);
+const createUserService = new CreateUserService(repository, bcryptService);
+const createUserController = new CreateUserController(createUserService);
 
 router.post('/users', createUserController.handle)
 
