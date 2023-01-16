@@ -9,5 +9,5 @@ export interface RepositoryContract {
     webhooks
   }: UserDTO) => Promise<UserDTO>
 
-  findByEmail: (email: string) => Promise<UserDTO> | null
+  findByEmail: (email: string) => Promise<UserDTO | null>
 }
