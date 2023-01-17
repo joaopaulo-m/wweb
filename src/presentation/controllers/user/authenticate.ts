@@ -14,7 +14,9 @@ class AuthenticateUserController implements Controller {
       const token = await this.authenticateUserUseCase.execute(email, password);
       return {
         statusCode: 200,
-        data: token
+        data: {
+          token
+        }
       }
     } catch(err) {
       return {
