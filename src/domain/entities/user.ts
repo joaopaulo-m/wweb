@@ -1,3 +1,5 @@
+import { Session } from './session'
+
 export type User = {
     name?: string
     email: string
@@ -6,7 +8,3 @@ export type User = {
     sessions?: Session[]
 }
 
-type Session = {
-    id: string
-    active: boolean
-}
