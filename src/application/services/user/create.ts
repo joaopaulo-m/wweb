@@ -12,7 +12,7 @@ export class CreateUserService implements CreateUserUseCase {
     async execute({ name, email, password, sessions, webhooks }: User) {
         
         const userAlreadyExists = await this.repository.findByEmail(email)
-        const passwordHash = this.cryptProvider.createHash(password, 8)
+        const passwordHash = await this.cryptProvider.createHash(password, 8)
         
         if (userAlreadyExists) throw new Error('User already exists! Try logging in.')
 
@@ -20,7 +20,6 @@ export class CreateUserService implements CreateUserUseCase {
             name,
             email,
             password: passwordHash,
-            sessions,
             webhooks
         });
 

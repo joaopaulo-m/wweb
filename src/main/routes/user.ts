@@ -1,18 +1,21 @@
-import express from 'express';
-import { CreateUserService } from '../../application/services/user/create';
-import { CreateUserController } from '../../infrastructure/controllers/user/create';
-import { Repository } from '../../infrastructure/repositories/repository';
-import { BcryptService } from '../../infrastructure/services/bcrypt';
-import { PrismaService } from '../../infrastructure/services/prisma';
+import express, { Request, Response } from 'express';
+import { makeAuthenticateUserController } from '../factories/authenticate-user-controller';
+import { makeCreateUserController } from '../factories/create-user-controller';
 
 const router = express.Router();
 
-const prismaOrm = new PrismaService();
-const bcryptService = new BcryptService();
-const repository = new Repository(prismaOrm);
-const createUserService = new CreateUserService(repository, bcryptService);
-const createUserController = new CreateUserController(createUserService);
+router.post('/', async (req: Request, res: Response) => {
+  const { name, email, password, sessions, webhooks } = req.body; 
+  const controller = makeCreateUserController();
+  const httpResponse = await controller.handle({ name, email, password, sessions, webhooks });
+  res.status(httpResponse.statusCode).json(httpResponse.data);
+})
 
-router.post('/users', createUserController.handle)
+router.post('/auth', async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const controller = makeAuthenticateUserController();
+  const httpResponse = await controller.handle({ email, password });
+  res.status(httpResponse.statusCode).json(httpResponse.data);
+})
 
-export { router };
+export default router;
