@@ -9,6 +9,6 @@ export type HttpRequest = {
 };
 
 type Session = {
-  id: string
-  active: boolean
+  sessionName: string
+  active?: boolean
 }

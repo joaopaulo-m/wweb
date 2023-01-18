@@ -1,3 +1,3 @@
 export interface StartSessionUseCase {
-  execute: (sessionName: string, webhooks: string) => void
+  execute: (sessionName: string) => Promise<any>
 }

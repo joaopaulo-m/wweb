@@ -6,8 +6,8 @@ class StartSessionService implements StartSessionUseCase {
     private readonly wppEngine: WppEgineContract
   ){}
 
-  async execute(sessionName: string, webhooks: string) {
-    const qrcode = await this.wppEngine.start(sessionName, webhooks);
+  async execute(sessionName: string) {
+    const qrcode = await this.wppEngine.start(sessionName);
 
     return qrcode;
   };

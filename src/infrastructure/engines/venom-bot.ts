@@ -1,23 +1,15 @@
 import { WppEgineContract } from "../../application/contracts/wpp-engine";
-import venom from 'venom-bot'
+import { RequestServiceContract } from "../contracts/request-service";
+import { VenomEngineContract } from "../contracts/venom";
 
 
 export class VenomBotEngine implements WppEgineContract {
   constructor(
-    public qrcode: string
-  ){}
+    private readonly engine: VenomEngineContract
+  ) {}
 
-  async start(sessionName: string, webhooks: string) {
-    const session = await venom.create(
-      sessionName,
-      base64Qrimg => {
-        this.exportQR(base64Qrimg)
-      }
-    )
-    return this.qrcode;
-  }
-
-  exportQR(base64Qrimg: string) {
-    this.qrcode = base64Qrimg
+  async start(sessionName: string) {
+    const qrcode = await this.engine.create(sessionName)
+    return qrcode
   }
 }
