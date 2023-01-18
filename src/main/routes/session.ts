@@ -13,5 +13,4 @@ router.post('/start/:session', VerifyToken, async (req: Request, res: Response) 
   res.status(httpResponse.statusCode).json(httpResponse.data)
 })
 
-
 export default router;

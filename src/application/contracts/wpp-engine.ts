@@ -1,3 +1,3 @@
 export interface WppEgineContract {
-  start: (sessionId: string) => Promise<string>
+  start: (sessionId: string) => Promise<any>
 }

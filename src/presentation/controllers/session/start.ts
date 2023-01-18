@@ -12,7 +12,7 @@ class StartSessionController {
 
       return {
         statusCode: 200,
-        data: { qrcode }
+        data: qrcode
       }
   }
 }

@@ -8,7 +8,7 @@ export const VerifyToken = (req: Request, res: Response, next: NextFunction) => 
 
   if (authorization) {
     const token = authorization.split(' ')[1];
-    const secretKey = process.env.JWT_TOKEN;
+    const { secretKey } = req.body;
   
     middleware.handle({ token,  secretKey });
     return next();

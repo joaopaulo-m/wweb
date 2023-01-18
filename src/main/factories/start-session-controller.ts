@@ -1,13 +1,11 @@
-import { StartSessionService } from "../../application/services/session/start";
-import { VenomBotEngine } from "../../infrastructure/engines/venom-bot";
-import { AxiosService } from "../../infrastructure/services/axios";
-import { StartSessionController } from "../../presentation/controllers/session/start";
-import { VenomBot } from "../engines/venom";
+import { StartSessionService } from "../../application/services/session/start"
+import { WppConnectEngine } from "../../infrastructure/engines/wpp-connect"
+import { StartSessionController } from "../../presentation/controllers/session/start"
+import { WppConnect } from "../engines/wpp-connect"
 
 export const makeStartSessionController = () => {
-  const requestService = new AxiosService()
-  const venomEngine = new VenomBot();
-  const engine = new VenomBotEngine(venomEngine)
+  const wppConnect = new WppConnect()
+  const engine = new WppConnectEngine(wppConnect)
   const service = new StartSessionService(engine)
   return new StartSessionController(service)
 }
