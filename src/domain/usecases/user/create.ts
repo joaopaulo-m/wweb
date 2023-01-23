@@ -5,7 +5,7 @@ export interface CreateUserUseCase {
         name,
         email,
         password,
-        sessions,
+        session,
         webhooks
      }: User) => Promise<User>
 }   

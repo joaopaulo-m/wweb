@@ -5,7 +5,7 @@ export interface RepositoryContract {
     name,
     email,
     password,
-    sessions,
+    session,
     webhooks
   }: UserDTO) => Promise<UserDTO>
 

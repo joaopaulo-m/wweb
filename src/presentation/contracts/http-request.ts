@@ -4,7 +4,7 @@ export type HttpRequest = {
   name?: string
   email: string
   password: string
-  sessions?: Session[]
+  session?: Session
   webhooks?: string
 };
 

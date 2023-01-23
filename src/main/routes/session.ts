@@ -6,11 +6,10 @@ const router = express.Router()
 
 router.post('/start/:session', VerifyToken, async (req: Request, res: Response) => {
   const { session } = req.params
+  const { webhooks } = req.body
 
   const controller = makeStartSessionController()
-  const httpResponse = await controller.handle(session)
-
-  res.status(httpResponse.statusCode).json(httpResponse.data)
+  controller.handle(session, webhooks, res)
 })
 
 export default router;

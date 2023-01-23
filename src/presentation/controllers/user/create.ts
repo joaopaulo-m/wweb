@@ -9,13 +9,13 @@ class CreateUserController implements Controller {
     private readonly createUserUseCase: CreateUserUseCase
   ) {}
 
-  async handle({ name, email, password, sessions, webhooks }: HttpRequest): Promise<HttpResponse> {
+  async handle({ name, email, password, session, webhooks }: HttpRequest): Promise<HttpResponse> {
     try {
       const user = await this.createUserUseCase.execute({
         name,
         email,
         password,
-        sessions,
+        session,
         webhooks
       });
   

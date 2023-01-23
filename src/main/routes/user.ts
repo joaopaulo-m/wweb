@@ -5,9 +5,9 @@ import { makeCreateUserController } from '../factories/create-user-controller';
 const router = express.Router();
 
 router.post('/', async (req: Request, res: Response) => {
-  const { name, email, password, sessions, webhooks } = req.body; 
+  const { name, email, password, session, webhooks } = req.body; 
   const controller = makeCreateUserController();
-  const httpResponse = await controller.handle({ name, email, password, sessions, webhooks });
+  const httpResponse = await controller.handle({ name, email, password, session, webhooks });
   res.status(httpResponse.statusCode).json(httpResponse.data);
 })
 

@@ -9,7 +9,7 @@ export class CreateUserService implements CreateUserUseCase {
         private readonly cryptProvider: CryptServiceContract
     ){}
 
-    async execute({ name, email, password, sessions, webhooks }: User) {
+    async execute({ name, email, password, session, webhooks }: User) {
         
         const userAlreadyExists = await this.repository.findByEmail(email)
         const passwordHash = await this.cryptProvider.createHash(password, 8)

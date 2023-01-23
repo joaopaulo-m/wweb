@@ -8,9 +8,9 @@ class Repository implements RepositoryContract {
         private readonly ormService: RepositoryContract
     ){}
 
-    async save({ name, email, password, sessions, webhooks }: UserDTO): Promise<UserDTO> {
+    async save({ name, email, password, session, webhooks }: UserDTO): Promise<UserDTO> {
         const user = await this.ormService.save({
-            name, email, password, sessions, webhooks
+            name, email, password, session, webhooks
         });
         if (!user) throw new Error('Unexpected error')
 

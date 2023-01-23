@@ -1,15 +1,13 @@
 import { StartSessionUseCase } from "../../../domain/usecases/session/start";
-import { WppEgineContract } from "../../contracts/wpp-engine";
+import { VenomBotEngineContract } from "../../contracts/venom-bot";
 
 class StartSessionService implements StartSessionUseCase {
   constructor(
-    private readonly wppEngine: WppEgineContract
+    private readonly venomBotEngine: VenomBotEngineContract
   ){}
 
-  async execute(sessionName: string) {
-    const qrcode = await this.wppEngine.start(sessionName);
-
-    return qrcode;
+  execute(sessionName: string, webhooks: string, httpReponse: any) {
+    this.venomBotEngine.start(sessionName, webhooks, httpReponse);
   };
 }
 

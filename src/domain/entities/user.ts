@@ -5,6 +5,6 @@ export type User = {
     email: string
     password: string
     webhooks?: string
-    sessions?: Session[]
+    session?: Session
 }
 

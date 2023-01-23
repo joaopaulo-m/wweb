@@ -7,13 +7,8 @@ class StartSessionController {
     private readonly startSessionUseCase: StartSessionUseCase
   ){}
 
-  async handle(sessionName: string): Promise<HttpResponse> {
-    const qrcode = await this.startSessionUseCase.execute(sessionName)
-
-      return {
-        statusCode: 200,
-        data: qrcode
-      }
+  handle(sessionName: string, webhooks: string, httpResponse: any) {
+    this.startSessionUseCase.execute(sessionName, webhooks, httpResponse)
   }
 }
 
