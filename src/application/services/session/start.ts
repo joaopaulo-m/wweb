@@ -1,13 +1,13 @@
 import { StartSessionUseCase } from "../../../domain/usecases/session/start";
-import { VenomBotEngineContract } from "../../contracts/venom-bot";
+import { WppEngineContract } from "../../contracts/wpp-engine";
 
 class StartSessionService implements StartSessionUseCase {
   constructor(
-    private readonly venomBotEngine: VenomBotEngineContract
+    private readonly wppEngine: WppEngineContract
   ){}
 
   execute(sessionName: string, webhooks: string, httpReponse: any) {
-    this.venomBotEngine.start(sessionName, webhooks, httpReponse);
+    this.wppEngine.start(sessionName, webhooks, httpReponse);
   };
 }
 
