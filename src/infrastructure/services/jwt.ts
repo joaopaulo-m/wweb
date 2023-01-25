@@ -11,7 +11,8 @@ class JwtService implements TokenContract {
   }
 
   verify({ token, secretKey }: TokenProviderData): any {
-    return jwt.verify(token, secretKey)
+    const decoded = jwt.verify(token, secretKey)
+    return decoded
   } 
 }
 
