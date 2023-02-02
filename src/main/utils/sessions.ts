@@ -2,8 +2,8 @@ import { Whatsapp } from "venom-bot"
 
 type Session = {
     name: string,
-    client: Whatsapp,
-    tokens: Token
+    client: any,
+    tokens?: Token
 }
 
 type Token = {

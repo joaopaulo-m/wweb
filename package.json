@@ -24,6 +24,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "prisma": "^4.8.1",
-    "venom-bot": "4.0.10"
+    "venom-bot": "https://github.com/orkestral/venom/releases/download/nightly/venom-bot-nightly.tgz",
+    "whatsapp-web.js": "^1.19.3"
   }
 }

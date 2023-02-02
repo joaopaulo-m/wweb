@@ -1,4 +1,4 @@
-import { create, Whatsapp } from 'venom-bot'
+import { create, CreateConfig, CreateOptions, Whatsapp } from 'venom-bot'
 import axios from 'axios'
 import { Response } from 'express'
 import { Sessions } from '../utils/sessions'
@@ -7,11 +7,13 @@ export class VenomBot {
 
   async create(sessionName: string, webhooks: string, res: Response) {
     let sessionData = Sessions.getSession(sessionName)
+    let sessionTokens = sessionData.tokens
 
     const session = await create(
       sessionName,
-      (base64) => {
-        res.status(200).json({ qrcode: base64 })
+      (base64, asciiQR, attempt) => {
+        res.status(200).json({ qrcode: base64, attempt })
+        console.log(asciiQR)
       },
       (statusSession: string, session: string) => {
         if (statusSession === 'isLogged') res.status(200).json({ msg: 'connected!' })
@@ -24,13 +26,13 @@ export class VenomBot {
         devtools: false, // Open devtools by default
         useChrome: true, // If false will use Chromium instance
         logQR: true,
-        autoClose: 60000,
+        autoClose: 0,
       },
       {
-        WABrowserId: (sessionData) ? sessionData.tokens.browserId : '',
-        WASecretBundle: (sessionData) ? sessionData.tokens.secretBundle : '',
-        WAToken1: (sessionData) ? sessionData.tokens.token1 : '',
-        WAToken2: (sessionData) ? sessionData.tokens.token2 : ''
+        WABrowserId: (sessionTokens) ? sessionTokens.browserId : '',
+        WASecretBundle: (sessionTokens) ? sessionTokens.secretBundle : '',
+        WAToken1: (sessionTokens) ? sessionTokens.token1 : '',
+        WAToken2: (sessionTokens) ? sessionTokens.token2 : ''
       }
     )
 
@@ -48,15 +50,14 @@ export class VenomBot {
         }
       })
     }
-
-    this.start(sessionName, webhooks)
   }
 
-  start(sessionName: string, webhooks: string) {
-    let session = Sessions.getSession(sessionName)
+  async start(sessionName: string, webhooks: string) {
+    const session = Sessions.getSession(sessionName)
+    const client: Whatsapp = session.client
 
-    session.client.onAnyMessage(async message => {
-      await axios.post(webhooks, message)
+    await client.onAnyMessage(message => {
+      axios.post(webhooks, message)
     })
   }
 
